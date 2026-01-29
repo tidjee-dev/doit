@@ -33,25 +33,25 @@ app:
 tasks:
 
   deps:
-    category: Setup/Build
+    category: Dependencies
     description: Install and tidy dependencies
     commands:
       - go mod download
       - go mod tidy
 
   build:
-    category: Setup/Build
+    category: Build
     description: Compile the application
     depends_on:
       - deps
     commands:
-      - go build -o my-app main.go
+      - go build -o bin/my-app main.go
 
-  run:
-    category: Setup/Build
+  dev:
+    category: Development
     description: Run the application
     depends_on:
-      - build
+      - deps
     commands:
-      - go run main.go
+      - go run ./...
 `

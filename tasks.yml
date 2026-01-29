@@ -1,7 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/tidjee-dev/doit/main/schema.json
-# ----------------------
-# Project configuration
-# ----------------------
+
 app:
   name: doit
   version: v0.1.0
@@ -10,40 +8,55 @@ app:
   author: Tidjee
   repo_url: https://github.com/tidjee-dev/doit
 
-# ----------------------
-# Tasks
-# ----------------------
 tasks:
-  # ----------------------
-  # Setup / Build
-  # ----------------------
   deps:
-    category: Setup/Build
+    category: Dependencies
     description: Install and tidy dependencies
     commands:
       # - go env
       - go mod download
       - go mod tidy
 
-  build:
-    category: Setup/Build
-    description: Compile the application
+  build-linux:
+    category: Build
+    description: Compile the application for Linux
     depends_on:
       - deps
     commands:
-      - go build -o bin/doit .
+      - env GOOS=linux GOARCH=amd64 go build -o bin/doit-linux .
 
-  run:
-    category: Setup/Build
-    description: Run the application locally
+  build-windows:
+    category: Build
+    description: Compile the application for Windows
     depends_on:
-      - build
+      - deps
     commands:
-      - ./bin/doit 
+      - env GOOS=windows GOARCH=amd64 go build -o bin/doit-windows.exe .
 
-  # ----------------------
-  # Quality
-  # ----------------------
+  build-mac-intel:
+    category: Build
+    description: Compile the application for macOS (Intel)
+    depends_on:
+      - deps
+    commands:
+      - env GOOS=darwin GOARCH=amd64 go build -o bin/doit-mac-intel .
+
+  build-mac-arm:
+    category: Build
+    description: Compile the application for macOS (Apple Silicon)
+    depends_on:
+      - deps
+    commands:
+      - env GOOS=darwin GOARCH=arm64 go build -o bin/doit-mac-arm .
+
+  dev:
+    category: Development
+    description: Run the application locally for development
+    depends_on:
+      - deps
+    commands:
+      - go run ./...
+
   test:
     category: Quality
     description: Run all tests
