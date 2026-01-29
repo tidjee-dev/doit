@@ -1,82 +1,117 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/tidjee-dev/doit/schema.json",
+  "$id": "https://raw.githubusercontent.com/tidjee-dev/doit/main/schema.json",
   "title": "Doit Task Runner Schema",
+  "description": "Configuration file schema for the Doit task runner",
   "type": "object",
   "required": [ "app", "tasks" ],
   "properties": {
     "app": {
+      "$ref": "#/$defs/app"
+    },
+    "tasks": {
       "type": "object",
-      "required": [ "name", "version", "description", "main_file", "author", "repo_url" ],
+      "description": "List of executable tasks indexed by task name",
+      "minProperties": 1,
+      "propertyNames": {
+        "description": "Task identifier (used on CLI)",
+        "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/task"
+      }
+    }
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "app": {
+      "type": "object",
+      "description": "Application metadata and entry point",
+      "required": [
+        "name",
+        "version",
+        "description",
+        "main_file",
+        "author",
+        "repo_url"
+      ],
       "properties": {
         "name": {
           "type": "string",
-          "minLength": 1
+          "description": "Application name",
+          "minLength": 1,
+          "examples": [ "doit" ]
         },
         "version": {
           "type": "string",
-          "minLength": 1
+          "description": "Application version (SemVer recommended)",
+          "pattern": "^v?\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$",
+          "examples": [ "v0.1.0" ]
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "Short description of the application",
+          "minLength": 1
         },
         "main_file": {
           "type": "string",
-          "pattern": "^.+\\.go$"
+          "description": "Path to the Go entry file",
+          "pattern": "^(\\.\\/)?[a-zA-Z0-9_\\-/]+\\.go$",
+          "examples": [ "cmd/doit/main.go" ]
         },
         "author": {
-          "type": "string"
+          "type": "string",
+          "description": "Project author or maintainer",
+          "minLength": 1
         },
         "repo_url": {
           "type": "string",
+          "description": "Source repository URL",
           "format": "uri"
         }
       },
       "additionalProperties": false
     },
 
-    "tasks": {
-      "type": "object",
-      "minProperties": 1,
-      "additionalProperties": {
-        "$ref": "#/$defs/task"
-      }
-    }
-  },
-
-  "$defs": {
     "task": {
       "type": "object",
+      "description": "Executable task definition",
       "required": [ "category", "description", "commands" ],
       "properties": {
         "category": {
           "type": "string",
-          "minLength": 1
+          "description": "Logical group used for listing or UI display",
+          "minLength": 1,
+          "examples": [ "Setup/Build", "Quality" ]
         },
         "description": {
           "type": "string",
+          "description": "Human-readable explanation of what the task does",
           "minLength": 1
         },
         "depends_on": {
           "type": "array",
+          "description": "Optional task dependency executed before this task",
           "items": {
             "type": "string",
+            "description": "Name of the dependent task",
             "minLength": 1
           },
           "maxItems": 1
         },
         "commands": {
           "type": "array",
+          "description": "Shell commands executed sequentially",
           "minItems": 1,
           "items": {
             "type": "string",
+            "description": "Shell command",
             "minLength": 1
           }
         }
       },
       "additionalProperties": false
     }
-  },
-
-  "additionalProperties": false
+  }
 }
