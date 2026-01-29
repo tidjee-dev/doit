@@ -28,7 +28,8 @@ app:
   version: v0.1.0
   description: My application
   main_file: main.go
-  author: Your Name
+  author:
+		- Your Name
   repo_url: https://github.com/yourname/yourrepo
 
 env:
