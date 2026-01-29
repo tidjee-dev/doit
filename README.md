@@ -115,14 +115,14 @@ app:
 
 ### `app` Fields
 
-| Field         | Type   | Description       |
-| ------------- | ------ | ----------------- |
-| `name`        | string | Application name  |
-| `version`     | string | SemVer (`vX.Y.Z`) |
-| `description` | string | Short description |
-| `main_file`   | string | Go entry file     |
-| `author`      | string | Maintainer        |
-| `repo_url`    | string | Repository URL    |
+| Field         | Type     | Description       |
+| ------------- | -------- | ----------------- |
+| `name`        | string   | Application name  |
+| `version`     | string   | SemVer (`vX.Y.Z`) |
+| `description` | string   | Short description |
+| `main_file`   | string   | Go entry file     |
+| `author`      | string[] | Maintainer        |
+| `repo_url`    | string   | Repository URL    |
 
 ## `env` (optional)
 
@@ -178,9 +178,9 @@ tasks:
 | ------------- | :------:  | -------- | --------------------- |
 | `category`    |     ✅    | string   | Logical grouping      |
 | `description` |     ✅    | string   | Displayed in CLI      |
-| `commands`    |     ✅    | string[] | Executed sequentially |
 | `depends_on`  |     ❌    | string[] | **Max 1 dependency**  |
 | `env`         |     ❌    | object   | Task-local env vars   |
+| `commands`    |     ✅    | string[] | Executed sequentially |
 
 ## Templating
 
