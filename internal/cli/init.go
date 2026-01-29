@@ -10,14 +10,22 @@ import (
 const tasksFile = "tasks.yml"
 
 func Init() error {
-	if _, err := os.Stat(tasksFile); err == nil {
-		ui.Error(fmt.Sprintf("%s already exists at current directory", tasksFile))
-		return nil
-	} else {
-		os.WriteFile(tasksFile, []byte(defaultTasksYAML), 0644)
-		ui.Success(fmt.Sprintf("created %s at current directory", tasksFile))
+	_, err := os.Stat(tasksFile)
+	if err == nil {
+		ui.Warn(fmt.Sprintf("%s already exists at current directory", tasksFile))
 		return nil
 	}
+
+	if !os.IsNotExist(err) {
+		return fmt.Errorf("stat %s failed: %w", tasksFile, err)
+	}
+
+	if err := os.WriteFile(tasksFile, []byte(defaultTasksYAML), 0644); err != nil {
+		return fmt.Errorf("write %s failed: %w", tasksFile, err)
+	}
+
+	ui.Success(fmt.Sprintf("created %s at current directory", tasksFile))
+	return nil
 }
 
 const defaultTasksYAML = `# yaml-language-server: $schema=https://raw.githubusercontent.com/tidjee-dev/doit/main/schema.json
