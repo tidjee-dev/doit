@@ -6,7 +6,7 @@ app:
   name: doit
   version: v0.1.0
   description: A task runner written in Go
-  main_file: cmd/doit/main.go
+  main_file: main.go
   author: Tidjee
   repo_url: https://github.com/tidjee-dev/doit
 
@@ -21,7 +21,7 @@ tasks:
     category: Setup/Build
     description: Install and tidy dependencies
     commands:
-      - go env
+      # - go env
       - go mod download
       - go mod tidy
 
@@ -31,7 +31,7 @@ tasks:
     depends_on:
       - deps
     commands:
-      - go build -o bin/doit ./cmd/doit
+      - go build -o bin/doit .
 
   run:
     category: Setup/Build
@@ -39,7 +39,7 @@ tasks:
     depends_on:
       - build
     commands:
-      - ./bin/doit
+      - ./bin/doit 
 
   # ----------------------
   # Quality

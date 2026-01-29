@@ -58,7 +58,7 @@
           "type": "string",
           "description": "Path to the Go entry file",
           "pattern": "^(\\.\\/)?[a-zA-Z0-9_\\-/]+\\.go$",
-          "examples": [ "cmd/doit/main.go" ]
+          "examples": [ "main.go" ]
         },
         "author": {
           "type": "string",
