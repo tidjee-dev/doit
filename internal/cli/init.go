@@ -7,7 +7,7 @@ import (
 	"github.com/tidjee-dev/doit/internal/ui"
 )
 
-const tasksFile = "tasks2.yml"
+const tasksFile = "tasks.yml"
 
 func Init() error {
 	if _, err := os.Stat(tasksFile); err == nil {
