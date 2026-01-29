@@ -17,15 +17,17 @@ type AppConfig struct {
 }
 
 type Task struct {
-	Category    string   `yaml:"category"`
-	Description string   `yaml:"description"`
-	DependsOn   []string `yaml:"depends_on"`
-	Commands    []string `yaml:"commands"`
+	Category    string            `yaml:"category"`
+	Description string            `yaml:"description"`
+	DependsOn   []string          `yaml:"depends_on"`
+	Env         map[string]string `yaml:"env"`
+	Commands    []string          `yaml:"commands"`
 }
 
 type Config struct {
-	App     AppConfig       `yaml:"app"`
-	Tasks   map[string]Task `yaml:"tasks"`
+	App   AppConfig         `yaml:"app"`
+	Env   map[string]string `yaml:"env"`
+	Tasks map[string]Task   `yaml:"tasks"`
 }
 
 func Load(path string) (Config, error) {

@@ -78,8 +78,19 @@ func (r *Runner) execute(name string, task config.Task) error {
 		task.Description,
 	)
 
-	for _, cmdStr := range task.Commands {
+	for _, rawCmd := range task.Commands {
+
+		cmdStr, err := renderTemplate(rawCmd, r.cfg, name, task)
+		if err != nil {
+			return fmt.Errorf(
+				"template error in task '%s': %w",
+				name,
+				err,
+			)
+		}
+
 		cmd := exec_util.Command(cmdStr)
+
 		if r.execMode == Quiet {
 			cmd.Stdout = nil
 			cmd.Stderr = nil
@@ -87,6 +98,9 @@ func (r *Runner) execute(name string, task config.Task) error {
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 		}
+
+		cmd.Env = mergeEnv(r.cfg.Env, task.Env)
+
 		if err := cmd.Run(); err != nil {
 			return fmt.Errorf("task '%s' failed: %w", name, err)
 		}

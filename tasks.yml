@@ -1,4 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/tidjee-dev/doit/main/schema.json
+# See doc at https://github.com/tidjee-dev/doit
 
 app:
   name: doit
@@ -8,46 +9,68 @@ app:
   author: Tidjee
   repo_url: https://github.com/tidjee-dev/doit
 
+env:
+  BIN_DIR: bin
+
 tasks:
   deps:
     category: Dependencies
     description: Install and tidy dependencies
     commands:
-      # - go env
       - go mod download
       - go mod tidy
+
+  build:
+    category: Build
+    description: Compile the application for the current platform
+    depends_on:
+      - deps
+    commands:
+      - go build -o {{ .Env.BIN_DIR }}/{{ .App.Name }} {{ .App.MainFile }}
 
   build-linux:
     category: Build
     description: Compile the application for Linux
     depends_on:
       - deps
+    env:
+      GOOS: linux
+      GOARCH: amd64
     commands:
-      - env GOOS=linux GOARCH=amd64 go build -o bin/doit-linux .
+      - go build -o {{ .Env.BIN_DIR }}/{{ .App.Name }}-linux {{ .App.MainFile }}
 
   build-windows:
     category: Build
     description: Compile the application for Windows
     depends_on:
       - deps
+    env:
+      GOOS: windows
+      GOARCH: amd64
     commands:
-      - env GOOS=windows GOARCH=amd64 go build -o bin/doit-windows.exe .
+      - go build -o {{ .Env.BIN_DIR }}/{{ .App.Name }}-windows.exe {{ .App.MainFile }}
 
   build-mac-intel:
     category: Build
     description: Compile the application for macOS (Intel)
     depends_on:
       - deps
+    env:
+      GOOS: darwin
+      GOARCH: amd64
     commands:
-      - env GOOS=darwin GOARCH=amd64 go build -o bin/doit-mac-intel .
+      - go build -o {{ .Env.BIN_DIR }}/{{ .App.Name }}-mac-intel {{ .App.MainFile }}
 
   build-mac-arm:
     category: Build
     description: Compile the application for macOS (Apple Silicon)
     depends_on:
       - deps
+    env:
+      GOOS: darwin
+      GOARCH: arm64
     commands:
-      - env GOOS=darwin GOARCH=arm64 go build -o bin/doit-mac-arm .
+      - go build -o {{ .Env.BIN_DIR }}/{{ .App.Name }}-mac-arm {{ .App.MainFile }}
 
   dev:
     category: Development
@@ -55,7 +78,7 @@ tasks:
     depends_on:
       - deps
     commands:
-      - go run ./...
+      - go run {{ .App.MainFile }}
 
   test:
     category: Quality
