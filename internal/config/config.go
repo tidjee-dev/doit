@@ -8,12 +8,12 @@ import (
 )
 
 type AppConfig struct {
-	Name        string `yaml:"name"`
-	Version     string `yaml:"version"`
-	Description string `yaml:"description"`
-	MainFile    string `yaml:"main_file"`
-	Author      string `yaml:"author"`
-	RepoURL     string `yaml:"repo_url"`
+	Name        string   `yaml:"name"`
+	Version     string   `yaml:"version"`
+	Description string   `yaml:"description"`
+	MainFile    string   `yaml:"main_file"`
+	Author      []string `yaml:"author"`
+	RepoURL     string   `yaml:"repo_url"`
 }
 
 type Task struct {
