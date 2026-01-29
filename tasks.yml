@@ -6,7 +6,8 @@ app:
   version: v0.1.0
   description: A task runner written in Go
   main_file: main.go
-  author: Tidjee
+  author:
+    - Tidjee
   repo_url: https://github.com/tidjee-dev/doit
 
 env:

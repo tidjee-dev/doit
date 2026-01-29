@@ -32,7 +32,7 @@ app:
   repo_url: https://github.com/yourname/yourrepo
 
 env:
-	BIN_DIR: bin
+  BIN_DIR: bin
 
 tasks:
   deps:

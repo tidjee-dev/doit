@@ -64,9 +64,14 @@
           "examples": [ "main.go" ]
         },
         "author": {
-          "type": "string",
+          "type": "array",
           "description": "Project author or maintainer",
-          "minLength": 1
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "description": "Author or maintainer name",
+            "minLength": 1
+          }
         },
         "repo_url": {
           "type": "string",
@@ -77,7 +82,7 @@
       "additionalProperties": false
     },
 
-    "env":{
+    "env": {
       "type": "object",
       "description": "Shell environment variables",
       "patternProperties": {
