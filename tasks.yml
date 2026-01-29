@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=./schema.json
+# ----------------------
+# Project configuration
+# ----------------------
+app:
+  name: doit
+  version: v0.1.0
+  description: A task runner written in Go
+  main_file: cmd/doit/main.go
+  author: Tidjee
+  repo_url: https://github.com/tidjee-dev/doit
+
+# ----------------------
+# Tasks
+# ----------------------
+tasks:
+  # ----------------------
+  # Setup / Build
+  # ----------------------
+  deps:
+    category: Setup/Build
+    description: Install and tidy dependencies
+    commands:
+      - go env
+      - go mod download
+      - go mod tidy
+
+  build:
+    category: Setup/Build
+    description: Compile the application
+    depends_on:
+      - deps
+    commands:
+      - go build -o bin/doit ./cmd/doit
+
+  run:
+    category: Setup/Build
+    description: Run the application locally
+    depends_on:
+      - build
+    commands:
+      - ./bin/doit
+
+  # ----------------------
+  # Quality
+  # ----------------------
+  test:
+    category: Quality
+    description: Run all tests
+    commands:
+      - go test ./...
+
+  fmt:
+    category: Quality
+    description: Format code
+    commands:
+      - gofmt -w $(go list -f '{{.Dir}}' ./...)
+
+  lint:
+    category: Quality
+    description: Run linter
+    commands:
+      - golangci-lint run
+
+  vet:
+    category: Quality
+    description: Static analysis
+    commands:
+      - go vet ./...
