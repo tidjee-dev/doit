@@ -48,6 +48,7 @@ func PrintHelp(cfg config.Config) {
 	}
 
 	for _, category := range sortedKeys(categories) {
+		sort.Strings(categories[category])
 		PrintSection(category)
 
 		for _, name := range categories[category] {

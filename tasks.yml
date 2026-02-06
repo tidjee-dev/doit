@@ -1,19 +1,233 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/tidjee-dev/doit/main/schema.json
-# See doc at https://github.com/tidjee-dev/doit
+# yaml-language-server: $schema=./schema.json
+# See doc at https://tidjee-dev.github.io/doit
 
 app:
   name: doit
-  version: v0.1.0
+  version: v0.2.0
   description: A task runner written in Go
   main_file: main.go
-  author:
+  authors:
     - Tidjee
+    - Tidjee Dev
+    - Tidjee Dev Team
   repo_url: https://github.com/tidjee-dev/doit
+
+templates:
+  sprig: true
 
 env:
   BIN_DIR: bin
 
 tasks:
+  test-sprig:
+    category: Development
+    description: Demonstrate common Sprig template helpers
+    quiet: true
+    env:
+      FALLBACK: "fallbackValue"
+      ENABLED: "true"
+      DEBUG: "debugValue"
+
+    commands:
+      # # ==================================================
+      # # String helpers
+      # # ==================================================
+      # - echo ''
+      # - echo '=== String helpers ==='
+      # - echo '{{ printf "%-12s => %s" "upper" ("doit" | upper) }}'
+      # - echo '{{ printf "%-12s => %s" "lower" ("DOIT" | lower) }}'
+      # - echo '{{ printf "%-12s => %s" "trim" ("  doit  " | trim) }}'
+      # - echo '{{ printf "%-12s => %s" "trimPrefix" ("v0.2.0" | trimPrefix "v") }}'
+      # - echo '{{ printf "%-12s => %s" "trimSuffix" ("v0.2.0" | trimSuffix ".0") }}'
+      # - echo '{{ printf "%-12s => %s" "replace" ("doit-dev" | replace "-" "_") }}'
+      # - echo '{{ printf "%-12s => %s" "repeat" ("doit" | repeat 3) }}'
+      # - echo '{{ printf "%-12s => %s" "title" ("doit task runner" | title) }}'
+      # - echo '{{ printf "%-12s => %s" "substr" ("doit" | substr 1 3) }}'
+
+      # # ==================================================
+      # # List helpers
+      # # ==================================================
+      # - echo ''
+      # - echo '=== List helpers ==='
+      # - echo '{{ printf "%-12s => %s" "join" (list "x" "y" "z" | join ", ") }}'
+      # - echo '{{ printf "%-12s => %s" "first" (list "x" "y" "z" | first) }}'
+      # - echo '{{ printf "%-12s => %s" "last" (list "x" "y" "z" | last) }}'
+      # - echo '{{ printf "%-12s => %d" "len" (list 1 2 3 | len) }}'
+      # - echo '{{ printf "%-12s => %s" "authors" (.App.Authors | join " & ") }}'
+      # - echo 'authors list:'
+      # - echo '{{ .App.Authors | join "\n- " | printf "- %s" }}'
+
+      # # ==================================================
+      # # Defaults & emptiness
+      # # ==================================================
+      # - echo ''
+      # - echo '=== Defaults & emptiness ==='
+      # - echo '{{ printf "%-12s => %s" "default" (default "bin" .Env.FALLBACK) }}'
+      # - echo '{{ printf "%-12s => %t" "empty" (empty .Env.FALLBACK) }}'
+      # - echo '{{ printf "%-12s => %v" "coalesce" (coalesce .Env.MISSING .Env.FALLBACK) }}'
+
+      # # ==================================================
+      # # Math helpers
+      # # ==================================================
+      # - echo ''
+      # - echo '=== Math helpers ==='
+      # - echo '{{ printf "%-12s => %d" "add" (add 2 3) }}'
+      # - echo '{{ printf "%-12s => %d" "sub" (sub 10 4) }}'
+      # - echo '{{ printf "%-12s => %d" "mul" (mul 3 4) }}'
+      # - echo '{{ printf "%-12s => %d" "div" (div 12 3) }}'
+      # - echo '{{ printf "%-12s => %d" "max" (max 3 7) }}'
+      # - echo '{{ printf "%-12s => %d" "min" (min 3 7) }}'
+
+      # # ==================================================
+      # # Dict / map helpers
+      # # ==================================================
+      # - echo ''
+      # - echo '=== Dict / map helpers ==='
+      # - echo '{{ $m := dict "a" 1 "b" 2 }}{{ printf "%-12s => %d" "get[a]" (get $m "a") }}'
+      # - echo '{{ printf "%-12s => %t" "hasKey" (hasKey (dict "x" 1) "x") }}'
+      # - echo '{{ printf "%-12s => %s" "keys" (keys (dict "a" 1 "b" 2) | sortAlpha | join ", ") }}'
+      # - echo '{{ printf "%-12s => %s" "values" (values (dict "a" 1 "b" 2) | join ", ") }}'
+      # - echo '{{ printf "%-12s => %s" "pluck" (pluck "name" (dict "name" "a") (dict "name" "b") | join ", ") }}'
+
+      # # ==================================================
+      # # Flow / logic helpers
+      # # ==================================================
+      # - echo ''
+      # - echo '=== Flow / logic helpers ==='
+      # - echo '{{ printf "%-12s => %s" "ternary T" (ternary "yes" "no" true) }}'
+      # - echo '{{ printf "%-12s => %s" "ternary F" (ternary "yes" "no" false) }}'
+      # - echo '{{ printf "%-12s => %s" "env enabled" (ternary "enabled" "disabled" (eq .Env.ENABLED "true")) }}'
+
+      # # ==================================================
+      # # Dates & time
+      # # ==================================================
+      # - echo ''
+      # - echo '=== Dates & time ==='
+      # - echo '{{ printf "%-12s => %s" "now" (now | date "2006-01-02 15:04:05") }}'
+
+      # # ==================================================
+      # # Missing key behavior
+      # # ==================================================
+      # - echo ''
+      # - echo '=== Missing keys ==='
+      # - echo '{{ printf "%-12s => %s" "env.MISSING" (ternary "unset" .Env.MISSING (empty .Env.MISSING)) }}'
+
+      - echo ''
+      - echo '=== String are not truthy ==='
+      - echo '{{ if not (empty .Env.DEBUG) }}debug{{ else }}not debug{{ end }}'
+      - echo '{{ if eq .Env.DEBUG "true" }}debug{{ else }}not debug{{ end }}'
+      # - echo '{{ ternary "set" "unset" .Env.MISSING }}'
+      - echo '{{ ternary "unset" "set" (empty .Env.MISSING) }}'
+      - echo '{{ ternary "set" "unset" (ne .Env.MISSING "") }}'
+
+  test-templates:
+    category: Development
+    description: Test all built-in Go template actions and functions
+    env:
+      FOO: bar
+      EMPTY: ""
+    quiet: true
+    commands:
+      # --------------------------------------------------
+      # Basic values
+      # --------------------------------------------------
+      - echo "App.Name={{ .App.Name }}"
+      - echo "Task.Name={{ .Task.Name }}"
+
+      # --------------------------------------------------
+      # Variables
+      # --------------------------------------------------
+      - echo "{{ $v := .App.Version }}VersionVar={{ $v }}"
+
+      # --------------------------------------------------
+      # if / else
+      # --------------------------------------------------
+      - echo "{{ if .App.RepoURL }}HasRepo{{ else }}NoRepo{{ end }}"
+      - echo "{{ if .Env.EMPTY }}ShouldNotPrint{{ else }}EmptyEnvOK{{ end }}"
+
+      # --------------------------------------------------
+      # with
+      # --------------------------------------------------
+      - echo "{{ with .App }}With={{ .Name }}@{{ .Version }}{{ end }}"
+
+      # --------------------------------------------------
+      # range (slice)
+      # --------------------------------------------------
+      - echo "Authors:"
+      - echo "{{ range .App.Authors }}- {{ . }} {{ end }}"
+
+      # --------------------------------------------------
+      # range with index
+      # --------------------------------------------------
+      - echo "{{ range $i, $a := .App.Authors }}{{ $i }}={{ $a }} {{ end }}"
+
+      # --------------------------------------------------
+      # range (map)
+      # --------------------------------------------------
+      - echo "Authors:"
+      - echo "{{ range $k, $v := .App.Authors }}{{ $k }}={{ $v }} {{ end }}"
+
+      # --------------------------------------------------
+      # len
+      # --------------------------------------------------
+      - echo "AuthorCount={{ len .App.Authors }}"
+
+      # --------------------------------------------------
+      # index
+      # --------------------------------------------------
+      - echo "FirstAuthor={{ index .App.Authors 0 }}"
+      - echo "BIN_DIR={{ index .Env "BIN_DIR" }}"
+
+      # --------------------------------------------------
+      # comparisons
+      # --------------------------------------------------
+      - echo "{{ if eq .App.Version "v0.2.0" }}EqOK{{ end }}"
+      - echo "{{ if ne .Task.Category "Build" }}NeOK{{ end }}"
+      - echo "{{ if gt (len .App.Authors) 1 }}GtOK{{ end }}"
+      - echo "{{ if ge (len .App.Authors) 2 }}GeOK{{ end }}"
+      - echo "{{ if lt 1 2 }}LtOK{{ end }}"
+      - echo "{{ if le 2 2 }}LeOK{{ end }}"
+
+      # --------------------------------------------------
+      # boolean logic
+      # --------------------------------------------------
+      - echo "{{ if and .App.Name .App.Version }}AndOK{{ end }}"
+      - echo "{{ if or .Env.FOO .Env.MISSING }}OrOK{{ end }}"
+      - echo "{{ if not .Env.MISSING }}NotOK{{ end }}"
+
+      # --------------------------------------------------
+      # printf
+      # --------------------------------------------------
+      - echo "{{ printf "App=%s Version=%s" .App.Name .App.Version }}"
+
+      # --------------------------------------------------
+      # pipeline
+      # --------------------------------------------------
+      - echo "{{ .App.Version | printf "[%s]" }}"
+
+      # --------------------------------------------------
+      # define / template
+      # --------------------------------------------------
+      - echo '{{ define "authors" }}{{ range . }}{{ . }}, {{ end }}{{ end }}{{ template "authors" .App.Authors }}'
+
+  test-env:
+    category: Development
+    description: Print the current environment
+    env:
+      BIN_DIR: dist
+    commands:
+      - echo $BIN_DIR
+      - echo {{ .Env.BIN_DIR }}
+      - echo {{ .Task.Name }}
+      - echo {{ .Task.Category }}
+      - echo {{ .Task.Description }}
+      - echo {{ .App.Name }}
+      - echo {{ .App.Version }}
+      - echo {{ .App.Description }}
+      - echo {{ .App.MainFile }}
+      - echo {{ .App.RepoURL }}
+      - echo {{ range .App.Authors }}{{ . }} {{ end }}
+
   deps:
     category: Dependencies
     description: Install and tidy dependencies
@@ -81,6 +295,15 @@ tasks:
     commands:
       - go run {{ .App.MainFile }}
 
+  dev-quiet:
+    category: Development
+    description: Run the application locally for development
+    depends_on:
+      - deps
+    quiet: true
+    commands:
+      - go run {{ .App.MainFile }}
+
   test:
     category: Quality
     description: Run all tests
@@ -91,7 +314,7 @@ tasks:
     category: Quality
     description: Format code
     commands:
-      - gofmt -w $(go list -f '{{.Dir}}' ./...)
+      - gofmt -w .
 
   lint:
     category: Quality

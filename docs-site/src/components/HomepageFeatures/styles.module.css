@@ -1,0 +1,84 @@
+.features {
+  padding: 2.2rem 0 3.2rem;
+  width: 100%;
+}
+
+.sectionTitle {
+  margin: 0 0 1.2rem;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+}
+
+.cardWrap {
+  margin-bottom: 1rem;
+}
+
+.card {
+  height: 100%;
+  padding: 1.1rem;
+  border-radius: 14px;
+  border: 1px solid rgb(2 6 23 / 10%);
+  background: #fff;
+  box-shadow: 0 10px 24px rgb(2 6 23 / 8%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px rgb(2 6 23 / 12%);
+}
+
+.icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--doit-font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: #0f172a;
+  background: linear-gradient(135deg, #67e8f9, #fb923c);
+}
+
+.cardTitle {
+  margin: 0.8rem 0 0.55rem;
+  font-size: 1.16rem;
+}
+
+.cardText {
+  margin: 0;
+  color: #334155;
+}
+
+[data-theme='dark'] .sectionTitle {
+  color: #f8fafc;
+}
+
+[data-theme='dark'] .card {
+  border-color: rgb(148 163 184 / 24%);
+  background: #0f172a;
+  box-shadow: 0 12px 22px rgb(2 6 23 / 45%);
+}
+
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 16px 28px rgb(2 6 23 / 55%);
+}
+
+[data-theme='dark'] .cardTitle {
+  color: #e2e8f0;
+}
+
+[data-theme='dark'] .cardText {
+  color: #cbd5e1;
+}
+
+[data-theme='dark'] .icon {
+  color: #020617;
+}
+
+@media screen and (max-width: 996px) {
+  .features {
+    padding-top: 1rem;
+  }
+}

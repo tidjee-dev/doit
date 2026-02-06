@@ -24,27 +24,24 @@ var rootCmd = &cobra.Command{
 	},
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if len(args) == 0 {
-			cfg, err := config.Load("tasks.yml")
-			if err != nil {
-				return err
-			}
-			ui.PrintHelp(cfg)
-			return nil
-		}
-
 		cfg, err := config.Load("tasks.yml")
 		if err != nil {
 			return err
 		}
 
+		if len(args) == 0 {
+			ui.PrintHelp(cfg)
+			return nil
+		}
+
 		r := runner.New(cfg)
 
-		if err := r.Run(args[0]); err != nil {
+		if err := r.Run(args[0], runner.Verbose); err != nil {
 			return err
 		}
 
 		ui.PrintSummary(r.TaskCount(), r.Duration())
+
 		return nil
 	},
 }

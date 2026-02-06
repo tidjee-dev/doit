@@ -3,6 +3,7 @@ package runner
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"time"
 
 	"github.com/tidjee-dev/doit/internal/config"
@@ -10,11 +11,11 @@ import (
 	"github.com/tidjee-dev/doit/internal/ui"
 )
 
-type ExecMode int
+type ExecMode uint8
 
 const (
-	Verbose ExecMode = iota
-	Quiet
+	Quiet ExecMode = iota
+	Verbose
 )
 
 type Runner struct {
@@ -24,7 +25,7 @@ type Runner struct {
 	startTime time.Time
 	taskCount int
 
-	execMode ExecMode
+	commander func(string) *exec.Cmd
 }
 
 func New(cfg config.Config) *Runner {
@@ -33,10 +34,11 @@ func New(cfg config.Config) *Runner {
 		visited:   make(map[string]bool),
 		running:   make(map[string]bool),
 		startTime: time.Now(),
+		commander: exec_util.Command,
 	}
 }
 
-func (r *Runner) Run(taskName string) error {
+func (r *Runner) Run(taskName string, parentMode ExecMode) error {
 	task, ok := r.cfg.Tasks[taskName]
 	if !ok {
 		return fmt.Errorf("task '%s' not found", taskName)
@@ -51,64 +53,67 @@ func (r *Runner) Run(taskName string) error {
 	}
 
 	r.running[taskName] = true
+	defer delete(r.running, taskName)
+
+	mode := parentMode
+	if task.Quiet {
+		mode = Quiet
+	}
 
 	for _, dep := range task.DependsOn {
-		if err := r.Run(dep); err != nil {
+		if err := r.Run(dep, mode); err != nil {
 			return err
 		}
 	}
 
-	if err := r.execute(taskName, task); err != nil {
+	if err := r.execute(taskName, task, mode); err != nil {
 		return err
 	}
 
-	r.running[taskName] = false
 	r.visited[taskName] = true
 	r.taskCount++
 
 	return nil
 }
 
-func (r *Runner) execute(name string, task config.Task) error {
+func (r *Runner) execute(name string, task config.Task, mode ExecMode) error {
 	start := time.Now()
 
-	ui.PrintTaskHeader(
-		task.Category,
-		name,
-		task.Description,
-	)
+	if mode == Verbose {
+		ui.PrintTaskHeader(
+			task.Category,
+			name,
+			task.Description,
+		)
+	}
+
+	env := mergeEnv(r.cfg.Env, task.Env)
 
 	for _, rawCmd := range task.Commands {
-
 		cmdStr, err := renderTemplate(rawCmd, r.cfg, name, task)
 		if err != nil {
-			return fmt.Errorf(
-				"template error in task '%s': %w",
-				name,
-				err,
-			)
+			return fmt.Errorf("template error in task '%s': %w", name, err)
 		}
 
-		cmd := exec_util.Command(cmdStr)
-
-		if r.execMode == Quiet {
-			cmd.Stdout = nil
-			cmd.Stderr = nil
-		} else {
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
+		if mode == Verbose {
+			ui.PrintCommand(cmdStr)
 		}
 
-		cmd.Env = mergeEnv(r.cfg.Env, task.Env)
+		cmd := r.commander(cmdStr)
+		cmd.Env = env
+
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
 
 		if err := cmd.Run(); err != nil {
 			return fmt.Errorf("task '%s' failed: %w", name, err)
 		}
-
-		ui.PrintCommand(cmdStr)
 	}
 
-	ui.PrintTaskFooter(time.Since(start))
+	if mode == Verbose {
+		ui.PrintTaskFooter(time.Since(start))
+	}
+
 	return nil
 }
 
