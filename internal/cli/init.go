@@ -29,14 +29,14 @@ func Init() error {
 }
 
 const defaultTasksYAML = `# yaml-language-server: $schema=https://raw.githubusercontent.com/tidjee-dev/doit/main/schema.json
-# See docs at https://github.com/tidjee-dev/doit
+# See docs at https://tidjee-dev.github.io/doit
 
 app:
   name: my-app
   version: v0.1.0
   description: My application
   main_file: main.go
-  author:
+  authors:
     - Your Name
   repo_url: https://github.com/yourname/yourrepo
 
@@ -57,7 +57,7 @@ tasks:
     depends_on:
       - deps
     commands:
-      - go build -o {{ .Env.BIN_DIR }}/{{ .App.Name }} main.go
+      - go build -o {{ .Env.BIN_DIR }}/{{ .App.Name }} {{ .App.MainFile }}
 
   dev:
     category: Development
@@ -65,5 +65,14 @@ tasks:
     depends_on:
       - deps
     commands:
-      - go run main.go
+      - go run {{ .App.MainFile }}
+
+  dev-quiet:
+    category: Development
+    description: Run the application
+    depends_on:
+      - deps
+    quiet: true
+    commands:
+      - go run {{ .App.MainFile }}
 `

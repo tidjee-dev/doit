@@ -9,6 +9,9 @@
     "app": {
       "$ref": "#/$defs/app"
     },
+    "templates": {
+      "$ref": "#/$defs/templates"
+    },
     "env": {
       "$ref": "#/$defs/env"
     },
@@ -36,7 +39,7 @@
         "version",
         "description",
         "main_file",
-        "author",
+        "authors",
         "repo_url"
       ],
       "properties": {
@@ -63,7 +66,7 @@
           "pattern": "^(\\.\\/)?[a-zA-Z0-9_\\-/]+\\.go$",
           "examples": [ "main.go" ]
         },
-        "author": {
+        "authors": {
           "type": "array",
           "description": "Project author or maintainer",
           "minItems": 1,
@@ -77,6 +80,18 @@
           "type": "string",
           "description": "Source repository URL",
           "format": "uri"
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "templates": {
+      "type": "object",
+      "description": "Template engine configuration",
+      "properties": {
+        "sprig": {
+          "type": "boolean",
+          "description": "Enable Sprig template functions (https://masterminds.github.io/sprig/)"
         }
       },
       "additionalProperties": false
@@ -122,6 +137,11 @@
         },
         "env": {
           "$ref": "#/$defs/env"
+        },
+        "quiet": {
+          "type": "boolean",
+          "description": "Hide doit logs only (does not suppress command output)",
+          "default": false
         },
         "commands": {
           "type": "array",

@@ -1,0 +1,175 @@
+:root {
+  --ifm-color-primary: #0f766e;
+  --ifm-color-primary-dark: #0a6b64;
+  --ifm-color-primary-darker: #09635d;
+  --ifm-color-primary-darkest: #064f4b;
+  --ifm-color-primary-light: #118b81;
+  --ifm-color-primary-lighter: #11978d;
+  --ifm-color-primary-lightest: #14b8a6;
+
+  --ifm-background-color: #f8fafc;
+  --ifm-heading-color: #0f172a;
+  --ifm-font-color-base: #111827;
+  --ifm-code-font-size: 90%;
+  --ifm-navbar-background-color: rgb(248 250 252 / 88%);
+  --ifm-navbar-link-hover-color: #0e7490;
+
+  --doit-font-heading: 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
+  --doit-font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --doit-font-mono: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', monospace;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--doit-font-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--doit-font-heading);
+  letter-spacing: -0.02em;
+}
+
+code,
+pre {
+  font-family: var(--doit-font-mono);
+}
+
+.navbar {
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgb(15 23 42 / 8%);
+}
+
+.button.button--outline {
+  border-width: 2px;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #5eead4;
+  --ifm-color-primary-dark: #2dd4bf;
+  --ifm-color-primary-darker: #14b8a6;
+  --ifm-color-primary-darkest: #0f766e;
+  --ifm-color-primary-light: #99f6e4;
+  --ifm-color-primary-lighter: #ccfbf1;
+  --ifm-color-primary-lightest: #ecfeff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-background-color: #0f172a;
+  --ifm-font-color-base: #e2e8f0;
+  --ifm-heading-color: #f8fafc;
+  --ifm-navbar-background-color: rgb(2 6 23 / 88%);
+  --ifm-navbar-link-color: #e2e8f0;
+  --ifm-navbar-link-hover-color: #99f6e4;
+}
+
+[data-theme='dark'] body {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6 {
+  color: var(--ifm-heading-color);
+}
+
+[data-theme='dark'] .markdown h1,
+[data-theme='dark'] .markdown h2,
+[data-theme='dark'] .markdown h3,
+[data-theme='dark'] .markdown h4,
+[data-theme='dark'] .markdown h5,
+[data-theme='dark'] .markdown h6 {
+  color: var(--ifm-heading-color);
+}
+
+[data-theme='dark'] .navbar {
+  background-color: var(--ifm-navbar-background-color);
+  border-bottom-color: rgb(148 163 184 / 22%);
+}
+
+[data-theme='dark'] .navbar__title,
+[data-theme='dark'] .navbar__link {
+  color: #e2e8f0;
+}
+
+[data-theme='dark'] .button.button--secondary.button--outline {
+  color: #e2e8f0;
+  border-color: rgb(148 163 184 / 42%);
+  background: rgb(15 23 42 / 45%);
+}
+
+[data-theme='dark'] .button.button--secondary.button--outline:hover {
+  color: #f8fafc;
+  border-color: rgb(94 234 212 / 62%);
+  background: rgb(15 23 42 / 72%);
+}
+
+/* Force readable dark syntax colors even when upstream theme styles are overridden. */
+[data-theme='dark'] .prism-code {
+  color: #f8f8f2 !important;
+}
+
+[data-theme='dark'] .prism-code .token.comment,
+[data-theme='dark'] .prism-code .token.prolog,
+[data-theme='dark'] .prism-code .token.doctype,
+[data-theme='dark'] .prism-code .token.cdata {
+  color: #6272a4 !important;
+}
+
+[data-theme='dark'] .prism-code .token.punctuation {
+  color: #f8f8f2 !important;
+}
+
+[data-theme='dark'] .prism-code .token.property,
+[data-theme='dark'] .prism-code .token.tag,
+[data-theme='dark'] .prism-code .token.constant,
+[data-theme='dark'] .prism-code .token.symbol,
+[data-theme='dark'] .prism-code .token.deleted {
+  color: #8be9fd !important;
+}
+
+[data-theme='dark'] .prism-code .token.boolean,
+[data-theme='dark'] .prism-code .token.number {
+  color: #bd93f9 !important;
+}
+
+[data-theme='dark'] .prism-code .token.selector,
+[data-theme='dark'] .prism-code .token.attr-name,
+[data-theme='dark'] .prism-code .token.string,
+[data-theme='dark'] .prism-code .token.char,
+[data-theme='dark'] .prism-code .token.builtin,
+[data-theme='dark'] .prism-code .token.inserted {
+  color: #f1fa8c !important;
+}
+
+[data-theme='dark'] .prism-code .token.operator,
+[data-theme='dark'] .prism-code .token.entity,
+[data-theme='dark'] .prism-code .token.url,
+[data-theme='dark'] .prism-code .token.variable {
+  color: #ffb86c !important;
+}
+
+[data-theme='dark'] .prism-code .token.atrule,
+[data-theme='dark'] .prism-code .token.attr-value,
+[data-theme='dark'] .prism-code .token.function,
+[data-theme='dark'] .prism-code .token.class-name {
+  color: #50fa7b !important;
+}
+
+[data-theme='dark'] .prism-code .token.keyword {
+  color: #ff79c6 !important;
+}
+
+[data-theme='dark'] .prism-code .token.regex,
+[data-theme='dark'] .prism-code .token.important {
+  color: #ff5555 !important;
+}
