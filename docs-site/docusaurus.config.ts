@@ -71,11 +71,6 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          to: '/docs/cli/reference',
-          label: 'CLI',
-          position: 'left',
-        },
-        {
           href: 'https://github.com/tidjee-dev/doit',
           label: 'GitHub',
           position: 'right',
