@@ -48,7 +48,6 @@ tasks:
     category: Dependencies
     description: Install and tidy dependencies
     commands:
-      - go mod download
       - go mod tidy
 
   build:
