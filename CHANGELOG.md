@@ -13,6 +13,15 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - Added initial `CHANGELOG.md` following Keep a Changelog format.
 
+### Changed
+
+- Updated CLI usage to `doit [task]` to reflect that running without arguments lists available tasks.
+- Clarified CLI argument validation message for too many positional arguments.
+
+### Removed
+
+- Removed unused French docs translation file while localization is not implemented.
+
 ## [0.2.1] - 2026-02-08
 
 ### Changed
