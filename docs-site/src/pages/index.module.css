@@ -63,12 +63,12 @@
 }
 
 .heroCode {
-  border: 1px solid rgb(2 6 23 / 10%);
+  border: 1px solid rgb(161 161 170 / 28%);
   border-radius: 16px;
   box-shadow:
-    0 16px 30px rgb(2 6 23 / 15%),
-    0 2px 8px rgb(2 6 23 / 10%);
-  background: #0f172a;
+    0 16px 30px rgb(63 63 70 / 10%),
+    0 2px 8px rgb(63 63 70 / 8%);
+  background: #fafafa;
   overflow: hidden;
   animation: riseIn 640ms ease-out both;
 }
@@ -102,23 +102,23 @@
 .heroCode :global(.theme-code-block-title) {
   margin: 0;
   padding: 0.6rem 1rem;
-  border-bottom: 1px solid rgb(226 232 240 / 14%);
+  border-bottom: 1px solid rgb(161 161 170 / 24%);
   font-family: var(--doit-font-heading);
-  color: #cbd5e1;
-  background: rgb(15 23 42 / 85%);
+  color: #52525b;
+  background: rgb(244 244 245 / 92%);
 }
 
 [data-theme='dark'] .heroBanner {
   background:
     radial-gradient(1200px 500px at 10% 0%, rgb(45 212 191 / 22%), transparent 70%),
     radial-gradient(1000px 420px at 92% 30%, rgb(251 146 60 / 24%), transparent 62%),
-    linear-gradient(180deg, #020617 0%, #0b1220 65%);
+    linear-gradient(180deg, #09090b 0%, #18181b 65%);
 }
 
 [data-theme='dark'] .heroBackdrop {
   background:
-    linear-gradient(90deg, rgb(148 163 184 / 12%) 1px, transparent 1px),
-    linear-gradient(rgb(148 163 184 / 12%) 1px, transparent 1px);
+    linear-gradient(90deg, rgb(161 161 170 / 12%) 1px, transparent 1px),
+    linear-gradient(rgb(161 161 170 / 12%) 1px, transparent 1px);
 }
 
 [data-theme='dark'] .kicker {
@@ -126,31 +126,30 @@
 }
 
 [data-theme='dark'] .heroTitle {
-  color: #e2e8f0;
+  color: #e4e4e7;
 }
 
 [data-theme='dark'] .heroSubtitle {
-  color: #cbd5e1;
+  color: #d4d4d8;
 }
 
 [data-theme='dark'] .heroCode {
-  border-color: rgb(148 163 184 / 24%);
+  border-color: rgb(161 161 170 / 24%);
   box-shadow:
-    0 14px 28px rgb(2 6 23 / 55%),
-    0 2px 8px rgb(2 6 23 / 35%);
-  background: #0b1220;
+    0 14px 28px rgb(9 9 11 / 55%),
+    0 2px 8px rgb(9 9 11 / 35%);
+  background: #18181b;
 }
 
 [data-theme='dark'] .heroCode :global(.theme-code-block),
 [data-theme='dark'] .heroCode :global(.theme-code-block > pre),
 [data-theme='dark'] .heroCode :global(.theme-code-block pre) {
-  background: #0b1220;
+  background: #18181b;
 }
 
 [data-theme='dark'] .heroCode :global(.theme-code-block-title) {
-  border-bottom-color: rgb(148 163 184 / 26%);
-  /* color: #e2e8f0; */
-  background: rgb(15 23 42 / 92%);
+  border-bottom-color: rgb(161 161 170 / 26%);
+  background: rgb(24 24 27 / 92%);
 }
 
 @keyframes riseIn {

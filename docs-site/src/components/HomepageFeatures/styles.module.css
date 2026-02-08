@@ -52,29 +52,29 @@
 }
 
 [data-theme='dark'] .sectionTitle {
-  color: #f8fafc;
+  color: #fafafa;
 }
 
 [data-theme='dark'] .card {
-  border-color: rgb(148 163 184 / 24%);
-  background: #0f172a;
-  box-shadow: 0 12px 22px rgb(2 6 23 / 45%);
+  border-color: rgb(161 161 170 / 24%);
+  background: #18181b;
+  box-shadow: 0 12px 22px rgb(9 9 11 / 45%);
 }
 
 [data-theme='dark'] .card:hover {
-  box-shadow: 0 16px 28px rgb(2 6 23 / 55%);
+  box-shadow: 0 16px 28px rgb(9 9 11 / 55%);
 }
 
 [data-theme='dark'] .cardTitle {
-  color: #e2e8f0;
+  color: #e4e4e7;
 }
 
 [data-theme='dark'] .cardText {
-  color: #cbd5e1;
+  color: #d4d4d8;
 }
 
 [data-theme='dark'] .icon {
-  color: #020617;
+  color: #09090b;
 }
 
 @media screen and (max-width: 996px) {

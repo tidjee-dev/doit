@@ -60,17 +60,17 @@ pre {
   --ifm-color-primary-lighter: #ccfbf1;
   --ifm-color-primary-lightest: #ecfeff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ifm-background-color: #0f172a;
-  --ifm-font-color-base: #e2e8f0;
-  --ifm-heading-color: #f8fafc;
-  --ifm-navbar-background-color: rgb(2 6 23 / 88%);
-  --ifm-navbar-link-color: #e2e8f0;
+  --ifm-background-color: #18181b;
+  --ifm-font-color-base: #e4e4e7;
+  --ifm-heading-color: #fafafa;
+  --ifm-navbar-background-color: rgb(9 9 11 / 88%);
+  --ifm-navbar-link-color: #e4e4e7;
   --ifm-navbar-link-hover-color: #99f6e4;
 }
 
 [data-theme='dark'] body {
-  background: #0f172a;
-  color: #e2e8f0;
+  background: #18181b;
+  color: #e4e4e7;
 }
 
 [data-theme='dark'] h1,
@@ -93,24 +93,24 @@ pre {
 
 [data-theme='dark'] .navbar {
   background-color: var(--ifm-navbar-background-color);
-  border-bottom-color: rgb(148 163 184 / 22%);
+  border-bottom-color: rgb(161 161 170 / 22%);
 }
 
 [data-theme='dark'] .navbar__title,
 [data-theme='dark'] .navbar__link {
-  color: #e2e8f0;
+  color: #e4e4e7;
 }
 
 [data-theme='dark'] .button.button--secondary.button--outline {
-  color: #e2e8f0;
-  border-color: rgb(148 163 184 / 42%);
-  background: rgb(15 23 42 / 45%);
+  color: #e4e4e7;
+  border-color: rgb(161 161 170 / 42%);
+  background: rgb(24 24 27 / 45%);
 }
 
 [data-theme='dark'] .button.button--secondary.button--outline:hover {
-  color: #f8fafc;
+  color: #fafafa;
   border-color: rgb(94 234 212 / 62%);
-  background: rgb(15 23 42 / 72%);
+  background: rgb(24 24 27 / 72%);
 }
 
 /* Force readable dark syntax colors even when upstream theme styles are overridden. */
