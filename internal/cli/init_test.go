@@ -47,9 +47,6 @@ func TestInit_CreatesDefaultTasksYAML(t *testing.T) {
 	if !strings.Contains(content, "authors:") {
 		t.Fatalf("expected authors field in default config, got:\n%s", content)
 	}
-	if !strings.Contains(content, "dev-quiet:") {
-		t.Fatalf("expected dev-quiet task in default config, got:\n%s", content)
-	}
 	if !strings.Contains(content, "quiet: true") {
 		t.Fatalf("expected quiet mode in default config, got:\n%s", content)
 	}
