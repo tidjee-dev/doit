@@ -30,9 +30,8 @@ env:
 tasks:
   deps:
     category: Setup
-    description: Download dependencies
+    description: Install dependencies
     commands:
-      - go mod download
       - go mod tidy
 
   build:
@@ -156,9 +155,9 @@ Readable release pipeline:
 tasks:
   deps:
     category: Release
-    description: Prepare deps
+    description: Install dependencies
     commands:
-      - go mod download
+      - go mod tidy
 
   build:
     category: Release

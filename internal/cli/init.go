@@ -46,7 +46,7 @@ env:
 tasks:
   deps:
     category: Dependencies
-    description: Install and tidy dependencies
+    description: Install dependencies
     commands:
       - go mod tidy
 
@@ -59,14 +59,6 @@ tasks:
       - go build -o {{ .Env.BIN_DIR }}/{{ .App.Name }} {{ .App.MainFile }}
 
   dev:
-    category: Development
-    description: Run the application
-    depends_on:
-      - deps
-    commands:
-      - go run {{ .App.MainFile }}
-
-  dev-quiet:
     category: Development
     description: Run the application
     depends_on:

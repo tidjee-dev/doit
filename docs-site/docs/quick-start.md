@@ -87,9 +87,9 @@ Commands execute sequentially in the order defined.
 tasks:
   deps:
     category: Setup
-    description: Download modules
+    description: Install dependencies
     commands:
-      - go mod download
+      - go mod tidy
 
   run:
     category: Dev
