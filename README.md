@@ -43,6 +43,13 @@ env:
   BIN_DIR: bin
 
 tasks:
+  hello:
+    category: Demo
+    description: Print hello and the first author's name
+    quiet: true
+    commands:
+      - echo "hello {{ .App.Authors | first }}"
+
   deps:
     category: Dependencies
     description: Install dependencies

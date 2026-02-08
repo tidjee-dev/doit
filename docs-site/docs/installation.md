@@ -128,3 +128,11 @@ Using Go install:
 ```bash
 go install github.com/tidjee-dev/doit@v0.1.0
 ```
+
+## List available versions
+
+Show all tagged versions published for this module:
+
+```bash
+go list -m -versions github.com/tidjee-dev/doit
+```

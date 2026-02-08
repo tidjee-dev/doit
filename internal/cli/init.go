@@ -40,10 +40,20 @@ app:
     - Your Name
   repo_url: https://github.com/yourname/yourrepo
 
+templates:
+  sprig: true
+
 env:
   BIN_DIR: bin
 
 tasks:
+  hello:
+    category: Demo
+    description: Print hello and the first author's name
+    quiet: true
+    commands:
+      - echo "hello {{ .App.Authors | first }}"
+
   deps:
     category: Dependencies
     description: Install dependencies

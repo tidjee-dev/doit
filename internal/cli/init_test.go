@@ -50,6 +50,12 @@ func TestInit_CreatesDefaultTasksYAML(t *testing.T) {
 	if !strings.Contains(content, "quiet: true") {
 		t.Fatalf("expected quiet mode in default config, got:\n%s", content)
 	}
+	if !strings.Contains(content, "sprig: true") {
+		t.Fatalf("expected sprig templates enabled in default config, got:\n%s", content)
+	}
+	if !strings.Contains(content, `echo "hello {{ .App.Authors | first }}"`) {
+		t.Fatalf("expected hello demo task in default config, got:\n%s", content)
+	}
 	if !strings.Contains(content, "go run {{ .App.MainFile }}") {
 		t.Fatalf("expected MainFile template in default config, got:\n%s", content)
 	}
