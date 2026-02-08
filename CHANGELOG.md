@@ -11,7 +11,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Added
 
-- No changes yet.
+- Added initial `CHANGELOG.md` following Keep a Changelog format.
 
 ## [0.2.1] - 2026-02-08
 
