@@ -97,7 +97,7 @@ func TestExecute_TooManyArgs(t *testing.T) {
 	writeTasksFile(t, dir, testTasksYAML)
 
 	err := runRoot(t, dir, "hello", "extra")
-	if err == nil || !strings.Contains(err.Error(), "expected exactly one task name") {
+	if err == nil || !strings.Contains(err.Error(), "expected zero or one task name") {
 		t.Fatalf("expected args validation error, got: %v", err)
 	}
 }

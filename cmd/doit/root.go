@@ -11,14 +11,14 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:           "doit <task>",
+	Use:           "doit [task]",
 	Short:         "Doit is a simple task runner",
 	SilenceUsage:  true,
 	SilenceErrors: false,
 
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) > 1 {
-			return errors.New("expected exactly one task name")
+			return errors.New("expected zero or one task name")
 		}
 		return nil
 	},
