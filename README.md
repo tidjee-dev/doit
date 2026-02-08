@@ -5,6 +5,10 @@ Explicit task runner written in Go projects.
 - [Docs](https://tidjee-dev.github.io/doit)
 - [Schema](https://raw.githubusercontent.com/tidjee-dev/doit/main/schema.json)
 
+## Prerequisites
+
+- Go 1.25.6 or newer
+
 ## Install
 
 ```bash
